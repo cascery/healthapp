@@ -52,7 +52,7 @@ class _ChatsState extends State<Chats> {
         query: chatDao.getChatQuery(),
         itemBuilder: (context, snapshot, animation, index) {
           final json = snapshot.value as Map<dynamic, dynamic>;
-          print('ok:' + json.toString());
+          print('ok:$json');
           return ChatCard(
               userId: json['uid'] ?? 'No id',
               profileUrl: json['photo'] ?? " ",

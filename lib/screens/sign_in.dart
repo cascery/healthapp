@@ -175,9 +175,7 @@ class _SignInState extends State<SignIn> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    elevation: 2,
-                    primary: Colors.indigo[900],
-                    onPrimary: Colors.black,
+                    foregroundColor: Colors.black, elevation: 2, backgroundColor: Colors.indigo[900],
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(32.0),
                     ),
@@ -199,7 +197,7 @@ class _SignInState extends State<SignIn> {
               child: TextButton(
                 style: ButtonStyle(
                     overlayColor:
-                        MaterialStateProperty.all(Colors.transparent)),
+                        WidgetStateProperty.all(Colors.transparent)),
                 onPressed: () {},
                 child: Text(
                   'Forgot Password?',
@@ -229,7 +227,7 @@ class _SignInState extends State<SignIn> {
                   TextButton(
                     style: ButtonStyle(
                         overlayColor:
-                            MaterialStateProperty.all(Colors.transparent)),
+                            WidgetStateProperty.all(Colors.transparent)),
                     onPressed: () => _pushPage(context, const Register()),
                     child: Text(
                       'Signup here',
@@ -314,7 +312,7 @@ class _SignInState extends State<SignIn> {
       Navigator.of(context)
           .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
     } catch (e) {
-      final snackBar = SnackBar(
+      const snackBar = SnackBar(
         content: Row(
           children: const [
             Icon(

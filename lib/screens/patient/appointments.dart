@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:health_app/firestore_data/appointment_history_list.dart';
 import 'package:health_app/firestore_data/appointment_list.dart';
 
 class Appointments extends StatefulWidget {
@@ -29,9 +30,9 @@ class _AppointmentsState extends State<Appointments> {
         ),
         iconTheme: const IconThemeData(color: Colors.black),
       ),
-      body: Container(
-        padding: const EdgeInsets.only(right: 10, left: 10, top: 10),
-        child: const AppointmentList(),
+      body: Padding(
+        padding: const EdgeInsets.only(right: 10),
+        child: AppointmentHistoryList(), // Remove Expanded and SizedBox
       ),
     );
   }

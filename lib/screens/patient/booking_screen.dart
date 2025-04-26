@@ -506,9 +506,7 @@ class _BookingScreenState extends State<BookingScreen> {
                         width: MediaQuery.of(context).size.width,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            elevation: 2,
-                            primary: Colors.indigo,
-                            onPrimary: Colors.black,
+                            foregroundColor: Colors.black, elevation: 2, backgroundColor: Colors.indigo,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(32.0),
                             ),
@@ -551,7 +549,7 @@ class _BookingScreenState extends State<BookingScreen> {
     String appointId = '${user.uid}${widget.doctorUid}$dateUTC $dateTime}';
     print('${widget.doctorUid}.');
     print('${user.uid}.');
-    print('${appointId}.');
+    print('$appointId.');
 
     var details = {
       'patientName': _nameController.text,

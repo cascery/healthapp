@@ -273,8 +273,7 @@ class _RegisterState extends State<Register> {
                       });
                     },
                     style: ElevatedButton.styleFrom(
-                        elevation: 2,
-                        primary: Colors.grey[350],
+                        elevation: 2, backgroundColor: Colors.grey[350],
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(32.0),
                         ),
@@ -313,8 +312,7 @@ class _RegisterState extends State<Register> {
                       });
                     },
                     style: ElevatedButton.styleFrom(
-                      elevation: 2,
-                      primary: Colors.grey[350],
+                      elevation: 2, backgroundColor: Colors.grey[350],
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32.0),
                       ),
@@ -351,9 +349,7 @@ class _RegisterState extends State<Register> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    elevation: 2,
-                    primary: Colors.indigo[900],
-                    onPrimary: Colors.black,
+                    foregroundColor: Colors.black, elevation: 2, backgroundColor: Colors.indigo[900],
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(32.0),
                     ),
@@ -396,7 +392,7 @@ class _RegisterState extends State<Register> {
                   TextButton(
                     style: ButtonStyle(
                         overlayColor:
-                            MaterialStateProperty.all(Colors.transparent)),
+                            WidgetStateProperty.all(Colors.transparent)),
                     onPressed: () => _pushPage(context, const SignIn()),
                     child: Text(
                       'Sign in',
