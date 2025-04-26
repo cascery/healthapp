@@ -135,6 +135,7 @@ class _BookingScreenState extends State<BookingScreen> {
     _getUser();
     selectTime(context);
     _doctorController.text = widget.doctor;
+    dateUTC = DateFormat('yyyy-MM-dd').format(selectedDate);
   }
 
   @override
@@ -506,7 +507,9 @@ class _BookingScreenState extends State<BookingScreen> {
                         width: MediaQuery.of(context).size.width,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.black, elevation: 2, backgroundColor: Colors.indigo,
+                            foregroundColor: Colors.black,
+                            elevation: 2,
+                            backgroundColor: Colors.indigo,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(32.0),
                             ),
@@ -545,51 +548,67 @@ class _BookingScreenState extends State<BookingScreen> {
   }
 
   Future<void> _createAppointment() async {
-    // print(dateUTC + ' ' + date_Time + ':00');
-    String appointId = '${user.uid}${widget.doctorUid}$dateUTC $dateTime}';
-    print('${widget.doctorUid}.');
-    print('${user.uid}.');
-    print('$appointId.');
+    try {
+      // Extracting values from the controllers
+      String appointId =
+          FirebaseFirestore.instance.collection('appointments').doc().id;
+      String name = _nameController.text;
+      String phone = _phoneController.text;
+      String description = _descriptionController.text;
+      String doctor = widget.doctor;
+      String doctorUid = widget.doctorUid;
+      String date = _dateController.text;
+      String time = _timeController.text;
+      String patientUid = user.uid;
 
-    var details = {
-      'patientName': _nameController.text,
-      'phone': _phoneController.text,
-      'description': _descriptionController.text,
-      'doctorName': _doctorController.text,
-      'date': DateTime.parse('$dateUTC $dateTime:00'),
-      'patientId': user.uid,
-      'doctorId': widget.doctorUid,
-      //help in cancelling appointment
-      'appointmentID': appointId,
-    };
+      // Prepare the data to be saved in Firestore
+      Map<String, dynamic> appointmentData = {
+        'appointId': appointId,
+        'patientName': name,
+        'phone': phone,
+        'description': description,
+        'doctor': doctor,
+        'doctorUid': doctorUid,
+        'date': dateUTC,
+        'time': dateTime,
+        'patientUid': patientUid,
+        'status':
+            'pending', // Status of the appointment (can be pending, confirmed, etc.)
+        'createdAt': FieldValue.serverTimestamp(),
+      };
 
-    FirebaseFirestore.instance
-        .collection('appointments')
-        .doc(user.uid)
-        .collection('pending')
-        .doc(appointId)
-        .set(details, SetOptions(merge: true));
+      // Saving appointment data to Firestore under "appointments" collection
+      await FirebaseFirestore.instance
+          .collection('appointments')
+          .doc(appointId) // Using auto-generated doc ID
+          .set(appointmentData);
 
-    FirebaseFirestore.instance
-        .collection('appointments')
-        .doc(user.uid)
-        .collection('all')
-        .doc(appointId)
-        .set(details, SetOptions(merge: true));
+      // Show the dialog upon successful booking
+      showAlertDialog(context);
+    } catch (e) {
+      // Handle errors and show the error to the user
+      print('Error creating appointment: $e');
+      showErrorDialog(context);
+    }
+  }
 
-    // add to doctor data
-    FirebaseFirestore.instance
-        .collection('appointments')
-        .doc(widget.doctorUid)
-        .collection('pending')
-        .doc(appointId)
-        .set(details, SetOptions(merge: true));
+  showErrorDialog(BuildContext context) {
+    // Error dialog when appointment fails
+    Widget okButton = TextButton(
+      child: Text("OK", style: GoogleFonts.lato(fontWeight: FontWeight.bold)),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
 
-    FirebaseFirestore.instance
-        .collection('appointments')
-        .doc(widget.doctorUid)
-        .collection('all')
-        .doc(appointId)
-        .set(details, SetOptions(merge: true));
+    AlertDialog alert = AlertDialog(
+      title:
+          Text("Error", style: GoogleFonts.lato(fontWeight: FontWeight.bold)),
+      content: Text("Failed to book the appointment. Please try again later.",
+          style: GoogleFonts.lato()),
+      actions: [okButton],
+    );
+
+    showDialog(context: context, builder: (BuildContext context) => alert);
   }
 }

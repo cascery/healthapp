@@ -47,14 +47,13 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB3vfG0mrND01mAOC4OZ0pOwTQdgVjwJOs',
-    appId: '1:131647123287:web:a351efe36bd16bf9d89812',
-    messagingSenderId: '131647123287',
-    projectId: 'health-app-99603',
-    authDomain: 'health-app-99603.firebaseapp.com',
-    databaseURL: 'https://health-app-99603-default-rtdb.firebaseio.com',
-    storageBucket: 'health-app-99603.appspot.com',
-  );
+      apiKey: "AIzaSyB_ClwVlMjVxm7lckpoVLmAnV9O5LCr4XI",
+      authDomain: "ehealth-391df.firebaseapp.com",
+      projectId: "ehealth-391df",
+      storageBucket: "ehealth-391df.firebasestorage.app",
+      messagingSenderId: "255898077293",
+      appId: "1:255898077293:web:6012cf04d8c6e978559764",
+      measurementId: "G-2YLC9D57L9");
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCv28h-Zp2q-bw1AhiPT0-rtVvM-9LBFQI',
@@ -72,7 +71,8 @@ class DefaultFirebaseOptions {
     projectId: 'health-app-99603',
     databaseURL: 'https://health-app-99603-default-rtdb.firebaseio.com',
     storageBucket: 'health-app-99603.appspot.com',
-    iosClientId: '131647123287-bs4vp3qrgi8cqnt1rg26nhjtfa0d2qj9.apps.googleusercontent.com',
+    iosClientId:
+        '131647123287-bs4vp3qrgi8cqnt1rg26nhjtfa0d2qj9.apps.googleusercontent.com',
     iosBundleId: 'com.example.healthApp',
   );
 }

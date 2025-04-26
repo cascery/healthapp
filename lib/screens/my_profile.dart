@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:health_app/firestore_data/appointment_history_list.dart';
+import 'package:health_app/firestore_data/appointment_list.dart';
 import 'package:health_app/globals.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -345,7 +346,7 @@ class _MyProfileState extends State<MyProfile> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const AppointmentHistoryList()));
+                                              const AppointmentList()));
                                 },
                                 child: const Text('View all'),
                               ),
